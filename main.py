@@ -1,27 +1,63 @@
-import requests
-from dotenv import load_dotenv
-import os
+# Inventory Management System
 
-# Load environment variables
-load_dotenv()
+items = []
 
-# Test the setup
-print("✅ Packages imported successfully!")
 
-# Test environment variable
-api_key = os.environ.get("API_KEY", "not-set")
-print(f"✅ API_KEY: {api_key}")
+# Function 1: Add items
+def add_items():
+    name = input("Enter product name: ")
+    amount = int(input("Enter product amount: "))
+    category = input("Enter category: ")
+    is_on_stock = input("Stock available? y/n: ").lower()
 
-# Test requests
-response = requests.get("https://api.github.com")
-print(f"✅ GitHub API status: {response.status_code}")
+    item = {"Name": name, "Amount": amount, "Category": category, "Stock": is_on_stock}
 
-def add (a, b):
-    a = 1
-    b = 2
-    return a + b
-answer = add(1, 2)
-print(f"✅ The answer is: {answer}")
+    items.append(item)
+    print("Item added successfully!")
 
-#This is a test comment to check if the code is working fine.
-#add comments to the code to make it more readable and understandable.
+
+# Function 2: View all items
+def view_items():
+    if not items:
+        print("No items found in inventory.")
+    else:
+        print("\n===== INVENTORY =====")
+
+        for item in items:
+            print(f"Name: {item['Name']}")
+            print(f"Amount: {item['Amount']}")
+            print(f"Category: {item['Category']}")
+
+            if item["Stock"] == "y":
+                print("Stock: Available")
+            else:
+                print("Stock: Out of Stock")
+
+            print("------------------------")
+
+
+# Function 3: Check product availability
+
+# Function 3: Check product availability
+
+
+def check_availability():
+    name = input("Please enter the name of the product: ")
+
+    for item in items:
+        if name.lower() == item["Name"].lower():
+            if item["Stock"] == "y":
+                print(f"{name} is available")
+            else:
+                print(f"{name} is not available")
+
+            return
+
+    print("Product not found in inventory.")
+
+
+# Main program
+add_items()
+add_items()
+view_items()
+check_availability()
